@@ -7,12 +7,8 @@ export class UserDto {
   @IsNotEmpty()
   lastName: string;
 
-  isRecieved?: boolean; 
-
-  createdAt?: Date;
-
   @IsNotEmpty()
-  locationTime: string;
+  localTime: string;
 }
 
 export class resultDto {

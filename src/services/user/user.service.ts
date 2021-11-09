@@ -22,10 +22,10 @@ export class UserService {
       const data = new User();
       data.firstName = dto.firstName;
       data.lastName = dto.lastName;
-      data.localTime = dto.locationTime;
+      data.localTime = dto.localTime;
       return await this.userRepository.save(dto);
     } catch (error) {
-      return error
+      return error;
     }
   }
 
@@ -79,7 +79,31 @@ export class UserService {
           .sent(res.firstName + ' ' + res.lastName)
           .then((data) => {
             if (data) {
-                this.userRepository.findOne(res.id).then((user) => {
+              this.userRepository.findOne(res.id).then((user) => {
+                user.isRecieved = true;
+                this.userRepository.save(user);
+              });
+            }
+          }),
+    );
+  }
+
+  async bulkMessageBackup() {
+    const user = await this.userRepository.find({
+      where: { isRecieved: false },
+    });
+    const selection = user.filter(
+      (data) =>
+        getFormatTimezone(data.localTime) > 30 &&
+        getFormatTimezone(data.localTime) < 1440,
+    );
+    selection.map(
+      async (res) =>
+        await this.messagerService
+          .sent(res.firstName + ' ' + res.lastName)
+          .then((data) => {
+            if (data) {
+              this.userRepository.findOne(res.id).then((user) => {
                 user.isRecieved = true;
                 this.userRepository.save(user);
               });

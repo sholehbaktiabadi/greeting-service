@@ -7,9 +7,17 @@ export class TaskSchedulerService {
   constructor(private userService: UserService) {}
   private readonly logger = new Logger();
 
-  @Cron(CronExpression.EVERY_10_MINUTES)
+  @Cron('0 */10 * * * *')
   handleCron() {
     this.userService.bulkMessage();
-    this.logger.debug('Called every 10 minutes');
+    this.logger.debug('Task Schedule Bulk Message is Running..............');
+  }
+
+  @Cron('0 */15 * * * *')
+  handleBackupdMessageCron() {
+    this.userService.bulkMessageBackup();
+    this.logger.debug(
+      'Task Schedule Backup Bulk Message is Running..............',
+    );
   }
 }

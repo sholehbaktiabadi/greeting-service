@@ -14,7 +14,7 @@ const { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD } = Env();
       database: DB_NAME,
       autoLoadEntities: true,
       synchronize: true,
-      logging: true,
+      logging: false,
       // migrationsTableName: '_schema_migration_history',
       // migrationsRun: true,
       // migrations: [join(__dirname, '/migrations/*.js')],

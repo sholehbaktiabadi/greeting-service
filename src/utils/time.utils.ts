@@ -11,11 +11,11 @@ export function getFormatTimezone(tz: string): number {
   let month = parseDate.getMonth();
   let date = parseDate.getDate();
   const format = year + '-' + ++month + '-' + date;
-  const dynamicDate = momentTz
+  const dynamicDateZone = momentTz
     .tz(`${format} 09:00`, 'YYYY-MM-DD HH:mm', tz)
     .format();
   const dateNow = moment();
-  const result = dateNow.diff(dynamicDate, 'minutes');
+  const result = dateNow.diff(dynamicDateZone, 'minutes');
   console.log(result);
   return result;
 }
