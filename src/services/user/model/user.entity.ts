@@ -11,8 +11,8 @@ export class User {
   @Column({ type: 'varchar', name: 'last_name', length: 60 })
   lastName: string;
 
-  @Column({ type: 'varchar', name: 'local_time', length: 60, nullable: true })
-  localTime: string;
+  @Column({ type: 'varchar', name: 'timezone', length: 60, nullable: true })
+  timezone: string;
 
   @Column({
     type: 'boolean',
@@ -21,6 +21,14 @@ export class User {
     default: false,
   })
   isRecieved: boolean;
+
+  @Column({
+    name: 'birthday',
+    type: 'date',
+    update: false,
+    nullable: false,
+  })
+  birtday: Date;
 
   @Column({
     name: 'created_at',

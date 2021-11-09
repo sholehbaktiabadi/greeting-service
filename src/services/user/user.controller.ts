@@ -26,4 +26,9 @@ export class UserController {
       .then((res) => res)
       .catch((err) => err);
   }
+
+  @Get('time')
+  async test() {
+    return this.userService.bulkMessage();
+  }
 }

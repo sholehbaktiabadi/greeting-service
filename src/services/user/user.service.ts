@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { getFormatTimezone } from '../../utils/time.utils';
 import { EntityNotFoundError, Repository } from 'typeorm';
 import { MessagerService } from '../messager/messager.service';
-import { UserDto } from './dto/user.dto';
+import { HalfMinute, nullMinute, OneDays, UserDto } from './dto/user.dto';
 import { User } from './model/user.entity';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class UserService {
       const data = new User();
       data.firstName = dto.firstName;
       data.lastName = dto.lastName;
-      data.localTime = dto.localTime;
+      data.timezone = dto.localTime;
       return await this.userRepository.save(dto);
     } catch (error) {
       return error;
@@ -68,24 +68,25 @@ export class UserService {
     const user = await this.userRepository.find({
       where: { isRecieved: false },
     });
-    const selection = user.filter(
-      (data) =>
-        getFormatTimezone(data.localTime) > 0 &&
-        getFormatTimezone(data.localTime) < 31,
-    );
-    selection.map(
-      async (res) =>
-        await this.messagerService
-          .sent(res.firstName + ' ' + res.lastName)
-          .then((data) => {
-            if (data) {
-              this.userRepository.findOne(res.id).then((user) => {
-                user.isRecieved = true;
-                this.userRepository.save(user);
-              });
-            }
-          }),
-    );
+    user
+      .filter(
+        (data) =>
+          getFormatTimezone(data.timezone, data.birtday) > nullMinute &&
+          getFormatTimezone(data.timezone, data.birtday) <= HalfMinute,
+      )
+      .map(
+        async (res) =>
+          await this.messagerService
+            .sent(res.firstName + ' ' + res.lastName)
+            .then((data) => {
+              if (data) {
+                this.userRepository.findOne(res.id).then((user) => {
+                  user.isRecieved = true;
+                  this.userRepository.save(user);
+                });
+              }
+            }),
+      );
   }
 
   async bulkMessageBackup() {
@@ -94,8 +95,8 @@ export class UserService {
     });
     const selection = user.filter(
       (data) =>
-        getFormatTimezone(data.localTime) > 30 &&
-        getFormatTimezone(data.localTime) < 1440,
+        getFormatTimezone(data.timezone, data.birtday) > HalfMinute &&
+        getFormatTimezone(data.timezone, data.birtday) < OneDays,
     );
     selection.map(
       async (res) =>

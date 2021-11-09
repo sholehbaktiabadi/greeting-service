@@ -5,12 +5,13 @@ export function isGreater(dateStart: Date) {
   return moment(dateStart).fromNow();
 }
 
-export function getFormatTimezone(tz: string): number {
+export function getFormatTimezone(tz: string, birtday: Date): number {
   const parseDate = new Date();
+  console.log(birtday, 'user birtday');
   let year = parseDate.getFullYear();
-  let month = parseDate.getMonth();
-  let date = parseDate.getDate();
-  const format = year + '-' + ++month + '-' + date;
+  let monthDate = birtday.toString().substring(5);
+  const format = year + '-' + monthDate;
+  console.log(format, ' format');
   const dynamicDateZone = momentTz
     .tz(`${format} 09:00`, 'YYYY-MM-DD HH:mm', tz)
     .format();
