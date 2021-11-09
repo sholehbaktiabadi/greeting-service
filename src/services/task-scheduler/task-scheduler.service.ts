@@ -13,7 +13,7 @@ export class TaskSchedulerService {
     this.logger.debug('Task Schedule Bulk Message is Running..............');
   }
 
-  @Cron(CronExpression.EVERY_10_MINUTES)
+  @Cron(CronExpression.EVERY_5_MINUTES)
   handleBackupdMessageCron() {
     this.userService.bulkMessageBackup();
     this.logger.debug(

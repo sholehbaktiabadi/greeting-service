@@ -71,8 +71,8 @@ export class UserService {
     user
       .filter(
         (data) =>
-          getFormatTimezone(data.timezone, data.birtday) > nullMinute &&
-          getFormatTimezone(data.timezone, data.birtday) <= HalfMinute,
+          getFormatTimezone(data.timezone, data.birtday, data.firstName) > nullMinute &&
+          getFormatTimezone(data.timezone, data.birtday, data.firstName) <= HalfMinute,
       )
       .map(
         async (res) =>
@@ -95,8 +95,8 @@ export class UserService {
     });
     const selection = user.filter(
       (data) =>
-        getFormatTimezone(data.timezone, data.birtday) > HalfMinute &&
-        getFormatTimezone(data.timezone, data.birtday) < OneDays,
+        getFormatTimezone(data.timezone, data.birtday, data.firstName) > HalfMinute &&
+        getFormatTimezone(data.timezone, data.birtday, data.firstName) < OneDays,
     );
     selection.map(
       async (res) =>
