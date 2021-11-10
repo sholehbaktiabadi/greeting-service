@@ -3,8 +3,6 @@
 <p align="center">
   API Documentation: <a href="https://documenter.getpostman.com/view/7919997/UVC5Fnh4"> Greeting Message Services by: Sholeh Bakti Abadi </a>
 </p>
-<br/>
-<br/>
 
 <br/>
 <p align="center">
