@@ -3,7 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { getFormatTimezone } from '../../utils/time.utils';
 import { EntityNotFoundError, Repository } from 'typeorm';
 import { MessagerService } from '../messager/messager.service';
-import { HalfMinute, nullMinute, OneDays, UserDto } from './dto/user.dto';
+import {
+  HalfMinute,
+  nullMinute,
+  OneDays,
+  OneWeek,
+  UserDto,
+} from './dto/user.dto';
 import { User } from './model/user.entity';
 
 @Injectable()
@@ -71,9 +77,9 @@ export class UserService {
     user
       .filter(
         (data) =>
-          getFormatTimezone(data.timezone, data.birtday, data.firstName) >
+          getFormatTimezone(data.timezone, data.birthday, data.firstName) >
             nullMinute &&
-          getFormatTimezone(data.timezone, data.birtday, data.firstName) <=
+          getFormatTimezone(data.timezone, data.birthday, data.firstName) <=
             HalfMinute,
       )
       .map(
@@ -97,9 +103,9 @@ export class UserService {
     });
     const selection = user.filter(
       (data) =>
-        getFormatTimezone(data.timezone, data.birtday, data.firstName) >
+        getFormatTimezone(data.timezone, data.birthday, data.firstName) >
           HalfMinute &&
-        getFormatTimezone(data.timezone, data.birtday, data.firstName) <
+        getFormatTimezone(data.timezone, data.birthday, data.firstName) <
           OneDays,
     );
     selection.map(
@@ -115,5 +121,27 @@ export class UserService {
             }
           }),
     );
+  }
+
+  async revertBirthday() {
+    const user = await this.userRepository.find({
+      where: { isRecieved: true },
+    });
+    const selection = user.filter(
+      (data) =>
+        getFormatTimezone(data.timezone, data.birthday, data.firstName) >
+          OneDays &&
+        getFormatTimezone(data.timezone, data.birthday, data.firstName) <
+          OneWeek,
+    );
+    selection.map(async (res) => {
+      this.userRepository.findOne(res.id).then((user) => {
+        user.isRecieved = false;
+        this.userRepository.save(user);
+        console.log(
+          '==============================================> status changed',
+        );
+      });
+    });
   }
 }

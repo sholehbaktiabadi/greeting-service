@@ -35,7 +35,7 @@ export class User {
     update: false,
     nullable: false,
   })
-  birtday: Date;
+  birthday: Date;
 
   @Column({
     name: 'created_at',

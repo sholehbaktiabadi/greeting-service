@@ -11,7 +11,7 @@ export class UserDto {
   localTime: string;
 
   @IsNotEmpty()
-  birtday: Date;
+  birthday: Date;
 }
 
 export class resultDto {
@@ -22,3 +22,4 @@ export class resultDto {
 export const OneDays: number = 1440;
 export const HalfMinute: number = 30;
 export const nullMinute: number = 0;
+export const OneWeek: number = 10080;
