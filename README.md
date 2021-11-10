@@ -1,4 +1,11 @@
 <p align="center">
+  API Documentation: <a href="http://nestjs.com/"> https://documenter.getpostman.com/view/7919997/UVC5Fnh4 </a>
+</p>
+<br/>
+<br/>
+<br/>
+
+<p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
