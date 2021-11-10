@@ -9,9 +9,4 @@ export class TimezoneController {
   async getAll() {
     return await this.timezoneService.findAll();
   }
-
-  @Get(':id')
-  async getOne(@Param('id') id: number) {
-    return await this.timezoneService.findOne(id);
-  }
 }

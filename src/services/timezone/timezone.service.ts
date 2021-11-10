@@ -6,8 +6,4 @@ export class TimezoneService {
   async findAll() {
     return MyTimezone;
   }
-
-  async findOne(id: number) {
-    return MyTimezone.find((data) => (data.id = id));
-  }
 }

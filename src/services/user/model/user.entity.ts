@@ -11,7 +11,13 @@ export class User {
   @Column({ type: 'varchar', name: 'last_name', length: 60 })
   lastName: string;
 
-  @Column({ type: 'varchar', name: 'timezone', length: 60, nullable: true })
+  @Column({
+    type: 'varchar',
+    name: 'timezone',
+    length: 60,
+    nullable: false,
+    default: 'Asia/Jakarta',
+  })
   timezone: string;
 
   @Column({
@@ -19,6 +25,7 @@ export class User {
     name: 'isRecieved_this_year',
     select: false,
     default: false,
+    nullable: false,
   })
   isRecieved: boolean;
 

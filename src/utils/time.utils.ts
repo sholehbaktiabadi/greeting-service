@@ -5,7 +5,11 @@ export function isGreater(dateStart: Date) {
   return moment(dateStart).fromNow();
 }
 
-export function getFormatTimezone(tz: string, birtday: Date, name: string): number {
+export function getFormatTimezone(
+  tz: string,
+  birtday: Date,
+  name: string,
+): number {
   const parseDate = new Date();
   let year = parseDate.getFullYear();
   let monthDate = birtday.toString().substring(5);
