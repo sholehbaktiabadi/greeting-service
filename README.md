@@ -8,7 +8,7 @@
 
 <br/>
 <p align="center">
-  API Documentation: <a href="https://hookbin.com/PxYWDlYy1XTpKPrrKX6j"> hookbin url: https://hookbin.com/PxYWDlYy1XTpKPrrKX6j </a>
+  Hookbin url:  <a href="https://hookbin.com/PxYWDlYy1XTpKPrrKX6j"> https://hookbin.com/PxYWDlYy1XTpKPrrKX6j </a>
 </p>
 <br/>
 
