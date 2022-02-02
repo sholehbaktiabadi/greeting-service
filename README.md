@@ -3,12 +3,12 @@
 </p>
 <br/>
 <br/>
-<p align="center">
+<p align="left">
   API Documentation: <a href="https://documenter.getpostman.com/view/7919997/UVC5Fnh4"> Greeting Message Services by: Sholeh Bakti Abadi </a>
 </p>
 
 <br/>
-<p align="center">
+<p align="lest">
   Hookbin url:  <a href="https://hookbin.com/PxYWDlYy1XTpKPrrKX6j"> https://hookbin.com/PxYWDlYy1XTpKPrrKX6j </a>
 </p>
 <br/>
